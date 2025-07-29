@@ -1,0 +1,49 @@
+import type { Metadata } from 'next'
+import './globals.css'
+import Header from '@/components/Header'
+import Footer from '@/components/Footer'
+import CosmicBadge from '@/components/CosmicBadge'
+
+export const metadata: Metadata = {
+  title: 'Developer Portfolio | Full-Stack Developer',
+  description: 'Professional portfolio showcasing web development projects, skills, and experience. Specializing in modern web technologies and innovative solutions.',
+  keywords: 'web developer, full-stack developer, portfolio, React, Next.js, TypeScript, JavaScript',
+  authors: [{ name: 'Your Name' }],
+  creator: 'Your Name',
+  openGraph: {
+    title: 'Developer Portfolio',
+    description: 'Professional portfolio showcasing web development projects and skills',
+    type: 'website',
+    locale: 'en_US',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Developer Portfolio',
+    description: 'Professional portfolio showcasing web development projects and skills',
+  },
+  robots: {
+    index: true,
+    follow: true,
+  },
+}
+
+export default function RootLayout({
+  children,
+}: {
+  children: React.ReactNode
+}) {
+  const bucketSlug = process.env.COSMIC_BUCKET_SLUG as string
+
+  return (
+    <html lang="en">
+      <body className="bg-gray-50 text-gray-900">
+        <Header />
+        <main className="min-h-screen">
+          {children}
+        </main>
+        <Footer />
+        <CosmicBadge bucketSlug={bucketSlug} />
+      </body>
+    </html>
+  )
+}
