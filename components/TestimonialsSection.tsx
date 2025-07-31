@@ -6,7 +6,12 @@ interface TestimonialCardProps {
 }
 
 function TestimonialCard({ testimonial }: TestimonialCardProps) {
-  const { metadata } = testimonial
+  const metadata = testimonial.metadata
+  
+  // Return null if metadata is not available
+  if (!metadata) {
+    return null
+  }
   
   return (
     <div className="bg-white p-8 rounded-xl shadow-sm border border-gray-100 hover:shadow-md transition-shadow">
