@@ -1,19 +1,17 @@
-// Base Cosmic object interface
 export interface CosmicObject {
   id: string;
-  slug: string;
   title: string;
+  slug: string;
   content?: string;
-  metadata: Record<string, any>;
-  type: string;
+  metadata?: Record<string, any>;
   created_at: string;
   modified_at: string;
+  status: string;
+  published_at?: string;
 }
 
-// Project interface
 export interface Project extends CosmicObject {
-  type: 'projects';
-  metadata: {
+  metadata?: {
     project_name?: string;
     description?: string;
     detailed_overview?: string;
@@ -37,10 +35,8 @@ export interface Project extends CosmicObject {
   };
 }
 
-// Skill interface
 export interface Skill extends CosmicObject {
-  type: 'skills';
-  metadata: {
+  metadata?: {
     skill_name?: string;
     category?: {
       key: string;
@@ -59,10 +55,8 @@ export interface Skill extends CosmicObject {
   };
 }
 
-// Work experience interface
 export interface WorkExperience extends CosmicObject {
-  type: 'work-experience';
-  metadata: {
+  metadata?: {
     job_title?: string;
     company_name?: string;
     company_logo?: {
@@ -83,10 +77,8 @@ export interface WorkExperience extends CosmicObject {
   };
 }
 
-// Testimonial interface
 export interface Testimonial extends CosmicObject {
-  type: 'testimonials';
-  metadata: {
+  metadata?: {
     client_name?: string;
     client_position?: string;
     company_name?: string;
@@ -105,30 +97,5 @@ export interface Testimonial extends CosmicObject {
   };
 }
 
-// API response types
-export interface CosmicResponse<T> {
-  objects: T[];
-  total: number;
-  limit: number;
-  skip?: number;
-}
-
-// Type guards
-export function isProject(obj: CosmicObject): obj is Project {
-  return obj.type === 'projects';
-}
-
-export function isSkill(obj: CosmicObject): obj is Skill {
-  return obj.type === 'skills';
-}
-
-export function isWorkExperience(obj: CosmicObject): obj is WorkExperience {
-  return obj.type === 'work-experience';
-}
-
-export function isTestimonial(obj: CosmicObject): obj is Testimonial {
-  return obj.type === 'testimonials';
-}
-
-// Utility type for skills grouped by category
-export type SkillsByCategory = Record<string, Skill[]>;
+// Simple type for technology badges
+export type Technology = string;

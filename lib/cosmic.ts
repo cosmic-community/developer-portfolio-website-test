@@ -5,7 +5,6 @@ export const cosmic = createBucketClient({
   bucketSlug: process.env.COSMIC_BUCKET_SLUG as string,
   readKey: process.env.COSMIC_READ_KEY as string,
   writeKey: process.env.COSMIC_WRITE_KEY as string,
-  apiEnvironment: 'staging',
 })
 
 // Helper function for error handling
@@ -79,7 +78,7 @@ export async function getSkills(): Promise<Skill[]> {
       .find({ type: 'skills' })
       .props(['id', 'title', 'slug', 'metadata'])
       .depth(1)
-      .sort('-metadata.proficiency_level');
+      .sort('title');
     
     return response.objects as Skill[];
   } catch (error) {
@@ -98,7 +97,7 @@ export async function getSkillsByCategory(): Promise<{ [key: string]: Skill[] }>
     const groupedSkills: { [key: string]: Skill[] } = {};
     
     skills.forEach(skill => {
-      const category = skill.metadata?.category?.title || 'Other';
+      const category = skill.metadata?.category?.value || 'Other';
       if (!groupedSkills[category]) {
         groupedSkills[category] = [];
       }
@@ -116,7 +115,7 @@ export async function getSkillsByCategory(): Promise<{ [key: string]: Skill[] }>
 export async function getWorkExperience(): Promise<WorkExperience[]> {
   try {
     const response = await cosmic.objects
-      .find({ type: 'work-experiences' })
+      .find({ type: 'work-experience' })
       .props(['id', 'title', 'slug', 'metadata'])
       .depth(1)
       .sort('-metadata.start_date');

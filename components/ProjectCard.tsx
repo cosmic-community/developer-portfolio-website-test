@@ -11,10 +11,10 @@ export default function ProjectCard({ project }: ProjectCardProps) {
   return (
     <article className="card group hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1">
       {/* Project Image */}
-      {project.metadata?.image && (
+      {project.metadata?.featured_image && (
         <div className="relative overflow-hidden">
           <img
-            src={`${project.metadata.image.imgix_url}?w=600&h=400&fit=crop&auto=format,compress`}
+            src={`${project.metadata.featured_image.imgix_url}?w=600&h=400&fit=crop&auto=format,compress`}
             alt={project.title}
             width="600"
             height="400"
@@ -26,10 +26,10 @@ export default function ProjectCard({ project }: ProjectCardProps) {
 
       <div className="p-6">
         {/* Category */}
-        {project.metadata?.category && (
+        {project.metadata?.project_type && (
           <div className="mb-3">
             <span className="text-sm font-medium text-primary-600 bg-primary-50 px-3 py-1 rounded-full">
-              {project.metadata.category.title}
+              {project.metadata.project_type.value}
             </span>
           </div>
         )}
@@ -52,8 +52,8 @@ export default function ProjectCard({ project }: ProjectCardProps) {
         {project.metadata?.technologies && project.metadata.technologies.length > 0 && (
           <div className="mb-6">
             <div className="flex flex-wrap gap-2">
-              {project.metadata.technologies.slice(0, 3).map((tech) => (
-                <TechnologyBadge key={tech.id} technology={tech} size="sm" />
+              {project.metadata.technologies.slice(0, 3).map((tech, index) => (
+                <TechnologyBadge key={index} technology={tech} size="sm" />
               ))}
               {project.metadata.technologies.length > 3 && (
                 <span className="text-xs text-gray-500 px-2 py-1 bg-gray-100 rounded">
@@ -74,9 +74,9 @@ export default function ProjectCard({ project }: ProjectCardProps) {
           </Link>
           
           <div className="flex space-x-3">
-            {project.metadata?.project_url && (
+            {project.metadata?.live_url && (
               <a
-                href={project.metadata.project_url}
+                href={project.metadata.live_url}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-gray-500 hover:text-primary-600 transition-colors duration-200"

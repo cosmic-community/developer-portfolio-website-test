@@ -33,8 +33,8 @@ export async function generateMetadata({ params }: ProjectPageProps): Promise<Me
     openGraph: {
       title: project.title,
       description: project.metadata?.description || '',
-      images: project.metadata?.image ? [{
-        url: `${project.metadata.image.imgix_url}?w=1200&h=630&fit=crop&auto=format,compress`,
+      images: project.metadata?.featured_image ? [{
+        url: `${project.metadata.featured_image.imgix_url}?w=1200&h=630&fit=crop&auto=format,compress`,
         width: 1200,
         height: 630,
       }] : [],
@@ -86,8 +86,8 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
                 <div className="mb-8">
                   <h3 className="text-lg font-semibold text-gray-900 mb-4">Technologies Used</h3>
                   <div className="flex flex-wrap gap-2">
-                    {project.metadata.technologies.map((tech) => (
-                      <TechnologyBadge key={tech.id} technology={tech} />
+                    {project.metadata.technologies.map((tech, index) => (
+                      <TechnologyBadge key={index} technology={tech} />
                     ))}
                   </div>
                 </div>
@@ -95,9 +95,9 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
 
               {/* Project Links */}
               <div className="flex flex-wrap gap-4">
-                {project.metadata?.project_url && (
+                {project.metadata?.live_url && (
                   <a
-                    href={project.metadata.project_url}
+                    href={project.metadata.live_url}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="btn-primary inline-flex items-center gap-2"
@@ -122,10 +122,10 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
             </div>
 
             {/* Project Image */}
-            {project.metadata?.image && (
+            {project.metadata?.featured_image && (
               <div className="animate-slide-up">
                 <img
-                  src={`${project.metadata.image.imgix_url}?w=800&h=600&fit=crop&auto=format,compress`}
+                  src={`${project.metadata.featured_image.imgix_url}?w=800&h=600&fit=crop&auto=format,compress`}
                   alt={project.title}
                   width="800"
                   height="600"
@@ -138,13 +138,13 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
       </section>
 
       {/* Project Content */}
-      {project.content && (
+      {project.metadata?.detailed_overview && (
         <section className="section-padding py-16 bg-gray-50">
           <div className="container-max-width">
             <div className="max-w-4xl mx-auto">
               <div 
                 className="prose prose-lg max-w-none"
-                dangerouslySetInnerHTML={{ __html: project.content }}
+                dangerouslySetInnerHTML={{ __html: project.metadata.detailed_overview }}
               />
             </div>
           </div>
