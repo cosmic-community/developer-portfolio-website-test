@@ -1,5 +1,5 @@
 // Base Cosmic object interface
-interface CosmicObject {
+export interface CosmicObject {
   id: string;
   slug: string;
   title: string;
@@ -14,36 +14,26 @@ interface CosmicObject {
 export interface Project extends CosmicObject {
   type: 'projects';
   metadata: {
+    project_name?: string;
     description?: string;
-    technologies?: Technology[];
-    project_url?: string;
-    github_url?: string;
-    image?: {
+    detailed_overview?: string;
+    featured_image?: {
       url: string;
       imgix_url: string;
     };
-    featured?: boolean;
-    category?: ProjectCategory;
+    gallery?: Array<{
+      url: string;
+      imgix_url: string;
+    }>;
+    technologies?: string[];
+    project_type?: {
+      key: string;
+      value: string;
+    };
+    live_url?: string;
+    github_url?: string;
     completion_date?: string;
-  };
-}
-
-// Technology interface
-export interface Technology extends CosmicObject {
-  type: 'technologies';
-  metadata: {
-    icon?: string;
-    color?: string;
-    description?: string;
-  };
-}
-
-// Project category interface
-export interface ProjectCategory extends CosmicObject {
-  type: 'project-categories';
-  metadata: {
-    description?: string;
-    color?: string;
+    featured?: boolean;
   };
 }
 
@@ -51,40 +41,45 @@ export interface ProjectCategory extends CosmicObject {
 export interface Skill extends CosmicObject {
   type: 'skills';
   metadata: {
-    proficiency_level?: number;
-    category?: SkillCategory;
-    description?: string;
+    skill_name?: string;
+    category?: {
+      key: string;
+      value: string;
+    };
+    proficiency?: {
+      key: string;
+      value: string;
+    };
     years_experience?: number;
-    icon?: string;
-  };
-}
-
-// Skill category interface
-export interface SkillCategory extends CosmicObject {
-  type: 'skill-categories';
-  metadata: {
     description?: string;
-    order?: number;
+    icon?: {
+      url: string;
+      imgix_url: string;
+    };
   };
 }
 
 // Work experience interface
 export interface WorkExperience extends CosmicObject {
-  type: 'work-experiences';
+  type: 'work-experience';
   metadata: {
-    company?: string;
-    position?: string;
-    start_date?: string;
-    end_date?: string;
-    current?: boolean;
-    description?: string;
-    achievements?: string[];
-    technologies?: Technology[];
-    location?: string;
+    job_title?: string;
+    company_name?: string;
     company_logo?: {
       url: string;
       imgix_url: string;
     };
+    location?: string;
+    employment_type?: {
+      key: string;
+      value: string;
+    };
+    start_date?: string;
+    end_date?: string | null;
+    current_position?: boolean;
+    description?: string;
+    achievements?: string;
+    technologies?: string[];
   };
 }
 
@@ -94,15 +89,18 @@ export interface Testimonial extends CosmicObject {
   metadata: {
     client_name?: string;
     client_position?: string;
-    client_company?: string;
-    rating?: number;
-    project?: Project;
-    testimonial_text?: string;
-    client_image?: {
+    company_name?: string;
+    client_photo?: {
       url: string;
       imgix_url: string;
     };
-    date?: string;
+    testimonial_text?: string;
+    rating?: {
+      key: string;
+      value: string;
+    };
+    related_project?: Project | null;
+    date_received?: string;
     featured?: boolean;
   };
 }
@@ -112,11 +110,8 @@ export interface CosmicResponse<T> {
   objects: T[];
   total: number;
   limit: number;
-  skip: number;
+  skip?: number;
 }
-
-// Utility types
-export type OptionalMetadata<T> = Partial<T['metadata']>;
 
 // Type guards
 export function isProject(obj: CosmicObject): obj is Project {
@@ -128,9 +123,12 @@ export function isSkill(obj: CosmicObject): obj is Skill {
 }
 
 export function isWorkExperience(obj: CosmicObject): obj is WorkExperience {
-  return obj.type === 'work-experiences';
+  return obj.type === 'work-experience';
 }
 
 export function isTestimonial(obj: CosmicObject): obj is Testimonial {
   return obj.type === 'testimonials';
 }
+
+// Utility type for skills grouped by category
+export type SkillsByCategory = Record<string, Skill[]>;

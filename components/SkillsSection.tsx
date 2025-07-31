@@ -3,11 +3,12 @@ import SkillCard from '@/components/SkillCard'
 
 export default async function SkillsSection() {
   const skillsByCategory = await getSkillsByCategory()
-  const categories = Object.keys(skillsByCategory)
-
-  if (categories.length === 0) {
+  
+  if (!skillsByCategory || Object.keys(skillsByCategory).length === 0) {
     return null
   }
+
+  const categories = Object.keys(skillsByCategory)
 
   return (
     <section id="about" className="section-padding py-24 bg-gray-50">
@@ -25,25 +26,32 @@ export default async function SkillsSection() {
 
         {/* Skills by Category */}
         <div className="space-y-12">
-          {categories.map((category, categoryIndex) => (
-            <div key={category} className="animate-slide-up" style={{ animationDelay: `${categoryIndex * 200}ms` }}>
-              <h3 className="text-2xl font-bold text-gray-900 mb-8 text-center">
-                {category}
-              </h3>
-              
-              <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-                {skillsByCategory[category].map((skill, skillIndex) => (
-                  <div 
-                    key={skill.id}
-                    className="animate-slide-up"
-                    style={{ animationDelay: `${(categoryIndex * 200) + (skillIndex * 100)}ms` }}
-                  >
-                    <SkillCard skill={skill} />
-                  </div>
-                ))}
+          {categories.map((category, categoryIndex) => {
+            const categorySkills = skillsByCategory[category]
+            if (!categorySkills || categorySkills.length === 0) {
+              return null
+            }
+
+            return (
+              <div key={category} className="animate-slide-up" style={{ animationDelay: `${categoryIndex * 200}ms` }}>
+                <h3 className="text-2xl font-bold text-gray-900 mb-8 text-center">
+                  {category}
+                </h3>
+                
+                <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                  {categorySkills.map((skill, skillIndex) => (
+                    <div 
+                      key={skill.id}
+                      className="animate-slide-up"
+                      style={{ animationDelay: `${(categoryIndex * 200) + (skillIndex * 100)}ms` }}
+                    >
+                      <SkillCard skill={skill} />
+                    </div>
+                  ))}
+                </div>
               </div>
-            </div>
-          ))}
+            )
+          })}
         </div>
       </div>
     </section>
