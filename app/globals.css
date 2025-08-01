@@ -4,12 +4,12 @@
 
 @layer base {
   :root {
-    --primary: 59 130 246;
+    --primary: 139 92 246;
     --primary-foreground: 255 255 255;
   }
   
   .dark {
-    --primary: 96 165 250;
+    --primary: 167 139 250;
     --primary-foreground: 17 24 39;
   }
   
