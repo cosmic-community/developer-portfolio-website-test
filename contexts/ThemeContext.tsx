@@ -63,3 +63,6 @@ export function useTheme() {
   }
   return context
 }
+
+// Export ThemeContext for components that need direct access
+export { ThemeContext }
