@@ -44,13 +44,15 @@ export function ThemeProvider({ children }: ThemeProviderProps) {
     setTheme(prevTheme => prevTheme === 'light' ? 'dark' : 'light')
   }
 
-  // Prevent hydration mismatch
-  if (!mounted) {
-    return <div className="invisible">{children}</div>
+  // Prevent hydration mismatch by providing a default context during SSR
+  const contextValue = {
+    theme,
+    toggleTheme,
+    setTheme
   }
 
   return (
-    <ThemeContext.Provider value={{ theme, toggleTheme, setTheme }}>
+    <ThemeContext.Provider value={contextValue}>
       {children}
     </ThemeContext.Provider>
   )
