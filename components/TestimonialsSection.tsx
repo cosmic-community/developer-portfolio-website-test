@@ -14,7 +14,7 @@ function TestimonialCard({ testimonial }: TestimonialCardProps) {
   }
   
   return (
-    <div className="bg-white p-8 rounded-xl shadow-sm border border-gray-100 hover:shadow-md transition-shadow">
+    <div className="bg-white dark:bg-gray-800 p-8 rounded-xl shadow-sm border border-gray-100 dark:border-gray-700 hover:shadow-md transition-shadow duration-200">
       <div className="flex items-start gap-4 mb-6">
         {metadata.client_photo && (
           <img
@@ -24,12 +24,12 @@ function TestimonialCard({ testimonial }: TestimonialCardProps) {
           />
         )}
         <div>
-          <h3 className="font-semibold text-gray-900">{metadata.client_name}</h3>
+          <h3 className="font-semibold text-gray-900 dark:text-white">{metadata.client_name}</h3>
           {metadata.client_position && (
-            <p className="text-sm text-gray-600">{metadata.client_position}</p>
+            <p className="text-sm text-gray-600 dark:text-gray-300">{metadata.client_position}</p>
           )}
           {metadata.company_name && (
-            <p className="text-sm text-gray-500">{metadata.company_name}</p>
+            <p className="text-sm text-gray-500 dark:text-gray-400">{metadata.company_name}</p>
           )}
         </div>
         {metadata.rating && (
@@ -38,7 +38,7 @@ function TestimonialCard({ testimonial }: TestimonialCardProps) {
               <svg
                 key={i}
                 className={`w-5 h-5 ${
-                  i < parseInt(metadata.rating?.key || '0') ? 'text-yellow-400' : 'text-gray-300'
+                  i < parseInt(metadata.rating?.key || '0') ? 'text-yellow-400' : 'text-gray-300 dark:text-gray-600'
                 }`}
                 fill="currentColor"
                 viewBox="0 0 20 20"
@@ -50,13 +50,13 @@ function TestimonialCard({ testimonial }: TestimonialCardProps) {
         )}
       </div>
       
-      <blockquote className="text-gray-700 leading-relaxed">
+      <blockquote className="text-gray-700 dark:text-gray-300 leading-relaxed">
         "{metadata.testimonial_text}"
       </blockquote>
       
       {metadata.date_received && (
-        <div className="mt-4 pt-4 border-t border-gray-100">
-          <time className="text-sm text-gray-500">
+        <div className="mt-4 pt-4 border-t border-gray-100 dark:border-gray-700">
+          <time className="text-sm text-gray-500 dark:text-gray-400">
             {new Date(metadata.date_received).toLocaleDateString('en-US', {
               year: 'numeric',
               month: 'long',
@@ -77,13 +77,13 @@ export default async function TestimonialsSection() {
   }
 
   return (
-    <section className="section-padding py-24 bg-white">
+    <section className="section-padding py-24 bg-white dark:bg-gray-900 transition-colors duration-200">
       <div className="container-max-width">
         <div className="text-center mb-16">
-          <h2 className="text-4xl lg:text-5xl font-bold text-gray-900 mb-6">
+          <h2 className="text-4xl lg:text-5xl font-bold text-gray-900 dark:text-white mb-6">
             What Clients Say
           </h2>
-          <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+          <p className="text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto">
             Don't just take my word for it. Here's what clients and colleagues have to say about working with me.
           </p>
         </div>

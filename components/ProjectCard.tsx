@@ -28,14 +28,14 @@ export default function ProjectCard({ project }: ProjectCardProps) {
         {/* Category */}
         {project.metadata?.project_type && (
           <div className="mb-3">
-            <span className="text-sm font-medium text-primary-600 bg-primary-50 px-3 py-1 rounded-full">
+            <span className="text-sm font-medium text-primary-600 dark:text-primary-400 bg-primary-50 dark:bg-primary-900/30 px-3 py-1 rounded-full">
               {project.metadata.project_type.value}
             </span>
           </div>
         )}
 
         {/* Title */}
-        <h3 className="text-xl font-bold text-gray-900 mb-3 group-hover:text-primary-600 transition-colors duration-200">
+        <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-3 group-hover:text-primary-600 dark:group-hover:text-primary-400 transition-colors duration-200">
           <Link href={`/projects/${project.slug}`}>
             {project.title}
           </Link>
@@ -43,7 +43,7 @@ export default function ProjectCard({ project }: ProjectCardProps) {
 
         {/* Description */}
         {project.metadata?.description && (
-          <p className="text-gray-600 mb-4 line-clamp-3">
+          <p className="text-gray-600 dark:text-gray-300 mb-4 line-clamp-3">
             {project.metadata.description}
           </p>
         )}
@@ -56,7 +56,7 @@ export default function ProjectCard({ project }: ProjectCardProps) {
                 <TechnologyBadge key={index} technology={tech} size="sm" />
               ))}
               {project.metadata.technologies.length > 3 && (
-                <span className="text-xs text-gray-500 px-2 py-1 bg-gray-100 rounded">
+                <span className="text-xs text-gray-500 dark:text-gray-400 px-2 py-1 bg-gray-100 dark:bg-gray-700 rounded">
                   +{project.metadata.technologies.length - 3} more
                 </span>
               )}
@@ -68,7 +68,7 @@ export default function ProjectCard({ project }: ProjectCardProps) {
         <div className="flex items-center justify-between">
           <Link
             href={`/projects/${project.slug}`}
-            className="text-primary-600 hover:text-primary-700 font-medium transition-colors duration-200"
+            className="text-primary-600 dark:text-primary-400 hover:text-primary-700 dark:hover:text-primary-300 font-medium transition-colors duration-200"
           >
             Learn More
           </Link>
@@ -79,7 +79,7 @@ export default function ProjectCard({ project }: ProjectCardProps) {
                 href={project.metadata.live_url}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-gray-500 hover:text-primary-600 transition-colors duration-200"
+                className="text-gray-500 dark:text-gray-400 hover:text-primary-600 dark:hover:text-primary-400 transition-colors duration-200"
                 aria-label="View live project"
               >
                 <FiExternalLink className="w-5 h-5" />
@@ -91,7 +91,7 @@ export default function ProjectCard({ project }: ProjectCardProps) {
                 href={project.metadata.github_url}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-gray-500 hover:text-primary-600 transition-colors duration-200"
+                className="text-gray-500 dark:text-gray-400 hover:text-primary-600 dark:hover:text-primary-400 transition-colors duration-200"
                 aria-label="View source code"
               >
                 <FiGithub className="w-5 h-5" />

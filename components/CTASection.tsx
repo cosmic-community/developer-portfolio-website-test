@@ -1,12 +1,12 @@
 export default function CTASection() {
   return (
-    <section className="section-padding py-24 bg-gray-900 text-white">
+    <section className="section-padding py-24 bg-gray-900 dark:bg-gray-950 text-white transition-colors duration-200">
       <div className="container-max-width text-center">
         <div className="max-w-4xl mx-auto">
           <h2 className="text-4xl lg:text-5xl font-bold mb-6">
             Ready to Start Your Next Project?
           </h2>
-          <p className="text-xl text-gray-300 mb-10 max-w-2xl mx-auto">
+          <p className="text-xl text-gray-300 dark:text-gray-400 mb-10 max-w-2xl mx-auto">
             I'm always excited to work on new challenges and bring innovative ideas to life. 
             Let's discuss how we can work together to achieve your goals.
           </p>
@@ -30,7 +30,7 @@ export default function CTASection() {
             </a>
           </div>
           
-          <div className="mt-12 pt-8 border-t border-gray-800">
+          <div className="mt-12 pt-8 border-t border-gray-800 dark:border-gray-700">
             <p className="text-gray-400 mb-4">Follow me on social media</p>
             <div className="flex justify-center gap-6">
               <a

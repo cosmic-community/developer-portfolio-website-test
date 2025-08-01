@@ -51,13 +51,13 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
   }
 
   return (
-    <div className="min-h-screen bg-white">
+    <div className="min-h-screen bg-white dark:bg-gray-900 transition-colors duration-200">
       {/* Back Navigation */}
-      <div className="section-padding py-8 border-b border-gray-100">
+      <div className="section-padding py-8 border-b border-gray-100 dark:border-gray-800">
         <div className="container-max-width">
           <Link 
             href="/projects"
-            className="inline-flex items-center gap-2 text-gray-600 hover:text-primary-600 transition-colors"
+            className="inline-flex items-center gap-2 text-gray-600 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400 transition-colors"
           >
             <FiArrowLeft className="w-4 h-4" />
             Back to Projects
@@ -71,12 +71,12 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
           <div className="grid lg:grid-cols-2 gap-12 items-start">
             {/* Project Info */}
             <div className="animate-slide-up">
-              <h1 className="text-4xl lg:text-5xl font-bold text-gray-900 mb-6">
+              <h1 className="text-4xl lg:text-5xl font-bold text-gray-900 dark:text-white mb-6">
                 {project.title}
               </h1>
               
               {project.metadata?.description && (
-                <p className="text-xl text-gray-600 mb-8 leading-relaxed">
+                <p className="text-xl text-gray-600 dark:text-gray-300 mb-8 leading-relaxed">
                   {project.metadata.description}
                 </p>
               )}
@@ -84,7 +84,7 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
               {/* Technologies */}
               {project.metadata?.technologies && project.metadata.technologies.length > 0 && (
                 <div className="mb-8">
-                  <h3 className="text-lg font-semibold text-gray-900 mb-4">Technologies Used</h3>
+                  <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-4">Technologies Used</h3>
                   <div className="flex flex-wrap gap-2">
                     {project.metadata.technologies.map((tech, index) => (
                       <TechnologyBadge key={index} technology={tech} />
@@ -139,11 +139,11 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
 
       {/* Project Content */}
       {project.metadata?.detailed_overview && (
-        <section className="section-padding py-16 bg-gray-50">
+        <section className="section-padding py-16 bg-gray-50 dark:bg-gray-800 transition-colors duration-200">
           <div className="container-max-width">
             <div className="max-w-4xl mx-auto">
               <div 
-                className="prose prose-lg max-w-none"
+                className="prose prose-lg dark:prose-invert max-w-none"
                 dangerouslySetInnerHTML={{ __html: project.metadata.detailed_overview }}
               />
             </div>

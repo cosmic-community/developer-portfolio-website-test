@@ -12,7 +12,7 @@ export default async function ProjectsPage() {
   const projects = await getProjects()
 
   return (
-    <div className="min-h-screen">
+    <div className="min-h-screen bg-white dark:bg-gray-900 transition-colors duration-200">
       <PageHeader 
         title="My Projects"
         description="A collection of my recent work and side projects"
@@ -24,7 +24,7 @@ export default async function ProjectsPage() {
             <ProjectGrid projects={projects} />
           ) : (
             <div className="text-center py-16">
-              <p className="text-gray-600 text-lg">No projects found. Check back soon!</p>
+              <p className="text-gray-600 dark:text-gray-300 text-lg">No projects found. Check back soon!</p>
             </div>
           )}
         </div>
